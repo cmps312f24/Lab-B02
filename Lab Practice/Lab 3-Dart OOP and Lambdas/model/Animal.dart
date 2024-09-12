@@ -49,6 +49,11 @@ class Lion extends Animal with Jumpable {
   void makeSound() {
     print('Roar');
   }
+
+  factory Lion.fromJson(Map<String, dymanic> json) {
+    return Lion(
+        name: json['name'], age: json['age'], prideSize: json['prideSize']);
+  }
 }
 
 mixin Jumpable {
@@ -86,5 +91,8 @@ void main(List<String> args) {
 
   for (Animal animal in animals) {
     animal.makeSound();
+
+    var json = {'name': 'Simba', 'age': 5, 'prideSize': 15};
+    var cub = Lion.fromJson(json);
   }
 }
