@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:state_tutorial/home_page_button.dart';
+import 'package:stadium_app/home_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,12 +13,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Stadium App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(),
+      home: const HomePage(),
     );
   }
 }

@@ -8,19 +8,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _textFieldValue1 = '0.0';
-  var _textFieldValue2 = '0.0';
+  var sum = 0.0;
+  final _textField1Controller = TextEditingController();
+  final _textField2Controller = TextEditingController();
 
   @override
   void initState() {
     super.initState();
   }
 
-  double getSum() {
-    if (_textFieldValue1.isEmpty) _textFieldValue1 = '0.0';
-    if (_textFieldValue2.isEmpty) _textFieldValue2 = '0.0';
-    return double.parse(_textFieldValue1) + double.parse(_textFieldValue2);
-  }
+  // double getSum() {
+  //   if (_textFieldValue1.isEmpty) _textFieldValue1 = '0.0';
+  //   if (_textFieldValue2.isEmpty) _textFieldValue2 = '0.0';
+  //   return double.parse(_textFieldValue1) + double.parse(_textFieldValue2);
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -34,11 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  _textFieldValue1 = value;
-                });
-              },
+              controller: _textField1Controller,
               decoration: InputDecoration(
                   // suffixIcon: const Icon(Icons.search),
                   // prefixIcon: const Icon(Icons.person),
@@ -50,11 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
-              onChanged: (value) {
-                setState(() {
-                  _textFieldValue2 = value;
-                });
-              },
+              controller: _textField2Controller,
               decoration: InputDecoration(
                   // suffixIcon: const Icon(Icons.search),
                   // prefixIcon: const Icon(Icons.person),
@@ -63,8 +56,19 @@ class _MyHomePageState extends State<MyHomePage> {
               )),
             ),
           ),
+          ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  sum = double.parse(_textField1Controller.text) +
+                      double.parse(_textField2Controller.text);
+
+                  _textField1Controller.clear();
+                  _textField2Controller.clear();
+                });
+              },
+              child: const Text('Add')),
           Text(
-            'Result = ${getSum()}',
+            'Result = $sum',
             style: const TextStyle(fontSize: 20),
           ),
         ],
