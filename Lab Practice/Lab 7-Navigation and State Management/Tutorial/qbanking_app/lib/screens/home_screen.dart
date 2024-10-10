@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:qbanking_app/providers/title_provider.dart';
 import 'package:qbanking_app/routes/app_router.dart';
 import 'package:qbanking_app/screens/shell_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends ConsumerState<HomeScreen> {
   final List<Map<String, dynamic>> _menuItems = [
     {
       'label': 'Withdraw',
@@ -54,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       //todo navigate to the route
                       // context.go(item['route']);
                       // update the title
-
+                      ref
+                          .read(appTitleNotifierProvider.notifier)
+                          .setTitle(item['label']);
                       if (item['label'] == 'Withdraw' ||
                           item['label'] == 'Deposit') {
                         context.pushNamed(item['routeName'],

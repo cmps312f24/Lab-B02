@@ -18,11 +18,10 @@ class TransferNotifier extends Notifier<List<Transfer>> {
     // convert the json to a list of map
     var transfersMap = jsonDecode(data);
     // convert the list of map to a list of account
-    List<Transfer> transfers = [];
+
     for (var transferMap in transfersMap) {
       addTransfer(Transfer.fromJson(transferMap));
     }
-    state = transfers;
   }
 
   void addTransfer(Transfer transfer) {
