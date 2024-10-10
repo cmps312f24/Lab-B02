@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qbanking_app/screens/account_screen.dart';
+import 'package:qbanking_app/screens/deposit_screen.dart';
 import 'package:qbanking_app/screens/home_screen.dart';
 import 'package:qbanking_app/screens/shell_screen.dart';
 
