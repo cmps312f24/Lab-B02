@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qbanking_app/routes/app_router.dart';
 
 class ShellScreen extends StatefulWidget {
   final Widget? child;
@@ -46,7 +48,9 @@ class _ShellScreenState extends State<ShellScreen> {
           if (index == 0) {
             // navigate to the home screen
             // change the title
+            context.go(AppRouter.home.path);
           } else {
+            context.pushNamed(AppRouter.account.name);
             // navigate to the home screen
             // change the title
           }

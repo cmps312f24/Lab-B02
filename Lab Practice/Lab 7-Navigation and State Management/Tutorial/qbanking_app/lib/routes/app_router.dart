@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'package:qbanking_app/screens/account_screen.dart';
@@ -77,7 +78,7 @@ class AppRouter {
             ],
           ),
         ],
-      )
+      ),
     ],
   );
 }
