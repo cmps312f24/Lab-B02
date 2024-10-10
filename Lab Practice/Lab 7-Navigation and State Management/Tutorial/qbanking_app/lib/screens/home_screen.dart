@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:qbanking_app/routes/app_router.dart';
+import 'package:qbanking_app/screens/shell_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -10,24 +13,25 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<Map<String, dynamic>> _menuItems = [
     {
       'label': 'Withdraw',
-      'icon': Icons.account_balance,
-      // 'route': AppRouter.account.name,
+      'icon': Icons.money,
+      'routeName': AppRouter.withdraw.name,
+      'params': {'accountNo': '123456'},
     },
     {
-      'label': 'Deposits',
+      'label': 'Deposit',
       'icon': Icons.account_balance_wallet,
-      // 'route': AppRouter.deposit.name,
+      'routeName': AppRouter.deposit.name,
       'params': {'accountNo': '123456'},
     },
     {
       'label': 'Transfers',
       'icon': Icons.transfer_within_a_station,
-      // 'route': AppRouter.transfer.name,
+      'routeName': AppRouter.transfer.name,
     },
     {
       'label': 'Transactions',
-      'icon': Icons.account_balance_wallet,
-      // 'route': AppRouter.transactions.name,
+      'icon': Icons.play_lesson_outlined,
+      'routeName': AppRouter.transaction.name,
     },
   ];
   @override
@@ -50,6 +54,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       //todo navigate to the route
                       // context.go(item['route']);
                       // update the title
+
+                      if (item['label'] == 'Withdraw' ||
+                          item['label'] == 'Deposit') {
+                        context.pushNamed(item['routeName'],
+                            pathParameters: item['params']);
+                      } else {
+                        context.pushNamed(item['routeName']);
+                      }
                     },
                     child: Card(
                       elevation: 5,
