@@ -4,6 +4,7 @@ import 'package:qbanking_app/screens/account_screen.dart';
 import 'package:qbanking_app/screens/deposit_screen.dart';
 import 'package:qbanking_app/screens/home_screen.dart';
 import 'package:qbanking_app/screens/new_transfer_screen.dart';
+import 'package:qbanking_app/screens/shell_screen.dart';
 import 'package:qbanking_app/screens/transactions_screen.dart';
 import 'package:qbanking_app/screens/transfer_screen.dart';
 
@@ -17,52 +18,66 @@ class AppRouter {
   static const deposit = (name: 'deposit', path: '/deposit:accountNo');
   static const withdraw = (name: 'withdraw', path: '/withdraw:accountNo');
 
-  final router = GoRouter(
+  /*
+      ShellRouter(
+      routes : [],
+      builder : (context , state , child) => ShellScreen(child : state.child)
+      
+      )
+  */
+
+  static final router = GoRouter(
     initialLocation: home.path,
     routes: [
-      GoRoute(
-          name: home.name,
-          path: home.path,
-          builder: (context, state) => const HomeScreen(),
-          routes: [
-            GoRoute(
-              path: account.path,
-              name: account.name,
-              builder: (context, state) => const AccountScreen(),
-            ),
-            GoRoute(
-                path: transfer.path,
-                name: transfer.name,
-                builder: (context, state) => const TransferScreen(),
-                routes: [
-                  GoRoute(
-                    name: newTransfer.name,
-                    path: newTransfer.path,
-                    builder: (context, state) => const NewTransferScreen(),
-                  )
-                ]),
-            GoRoute(
-              path: transaction.path,
-              name: transaction.name,
-              builder: (context, state) => const TransactionsScreen(),
-            ),
-            GoRoute(
-              path: deposit.path,
-              name: deposit.name,
-              builder: (context, state) {
-                final accountNo = state.pathParameters['accountNo'];
-                return DepositScreen(accountNo: accountNo!);
-              },
-            ),
-            GoRoute(
-              path: withdraw.path,
-              name: withdraw.name,
-              builder: (context, state) {
-                final accountNo = state.pathParameters['accountNo'];
-                return DepositScreen(accountNo: accountNo!);
-              },
-            ),
-          ]),
+      ShellRoute(
+        builder: (context, state, child) => ShellScreen(child: child),
+        routes: [
+          GoRoute(
+            name: home.name,
+            path: home.path,
+            builder: (context, state) => const HomeScreen(),
+            routes: [
+              GoRoute(
+                path: account.path,
+                name: account.name,
+                builder: (context, state) => const AccountScreen(),
+              ),
+              GoRoute(
+                  path: transfer.path,
+                  name: transfer.name,
+                  builder: (context, state) => const TransferScreen(),
+                  routes: [
+                    GoRoute(
+                      name: newTransfer.name,
+                      path: newTransfer.path,
+                      builder: (context, state) => const NewTransferScreen(),
+                    )
+                  ]),
+              GoRoute(
+                path: transaction.path,
+                name: transaction.name,
+                builder: (context, state) => const TransactionsScreen(),
+              ),
+              GoRoute(
+                path: deposit.path,
+                name: deposit.name,
+                builder: (context, state) {
+                  final accountNo = state.pathParameters['accountNo'];
+                  return DepositScreen(accountNo: accountNo!);
+                },
+              ),
+              GoRoute(
+                path: withdraw.path,
+                name: withdraw.name,
+                builder: (context, state) {
+                  final accountNo = state.pathParameters['accountNo'];
+                  return DepositScreen(accountNo: accountNo!);
+                },
+              ),
+            ],
+          ),
+        ],
+      )
     ],
   );
 }
