@@ -19,7 +19,7 @@ abstract class ProjectDao {
   Future<void> updateProject(Project project);
 
   @Insert(onConflict: OnConflictStrategy.replace)
-  Future<Future> upsert(Project project);
+  Future<void> upsertProject(Project project);
 
   @Query("SELECT * FROM ProjectTodoStatusCounts WHERE id = :pid")
   Stream<ProjectTodoStatusCounts?> observeProjectTodoStatusCounts(int pid);
