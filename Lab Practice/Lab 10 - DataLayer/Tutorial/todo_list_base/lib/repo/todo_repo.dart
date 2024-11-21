@@ -24,5 +24,5 @@ class TodoListRepo {
   Stream<List<Todo>> observeTodos(int pid) => todoDao.observeTodos(pid);
   Future<void> addTodo(Todo todo) => todoDao.addTodo(todo);
   Future<void> updateTodo(Todo todo) => todoDao.updateTodo(todo);
-  Future<void> upsertTodo(Todo todo) => todoDao.updateTodo(todo);
+  Future<void> upsertTodo(Todo todo) => todoDao.upsertTodo(todo);
 }

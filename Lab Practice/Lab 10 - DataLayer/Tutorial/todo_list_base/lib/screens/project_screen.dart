@@ -13,7 +13,6 @@ class ProjectScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Explain the projectProvider which return the list of projects
     final projectProvider = ref.watch(projectNotifierProvider);
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Projects'),
