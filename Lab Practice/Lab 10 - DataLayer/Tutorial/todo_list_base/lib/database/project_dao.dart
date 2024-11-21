@@ -14,10 +14,13 @@ abstract class ProjectDao {
 
   @insert
   Future<void> addProject(Project project);
-  
+
   @update
   Future<void> updateProject(Project project);
 
   @Insert(onConflict: OnConflictStrategy.replace)
   Future<Future> upsert(Project project);
+
+  @Query("SELECT * FROM ProjectTodoStatusCounts WHERE id = :pid")
+  Stream<ProjectTodoStatusCounts?> observeProjectTodoStatusCounts(int pid);
 }
