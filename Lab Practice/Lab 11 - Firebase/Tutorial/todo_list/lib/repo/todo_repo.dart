@@ -29,9 +29,12 @@ class TodoListRepo {
   Future<void> updateProject(Project project) =>
       projectRef.doc(project.id).update(project.toMap());
 
-  Future<void> deleteProject(Project project) =>
-      projectRef.doc(project.id).delete();
+  Future<void> deleteProject(Project project) async {
+    await todoRef.where('pid', isEqualTo: project.id).get().then((snapshot) =>
+        snapshot.docs.forEach((doc) => todoRef.doc(doc.id).delete()));
 
+    await projectRef.doc(project.id).delete();
+  }
   // todos
 
   Stream<List<Todo>> observeTodos(String projectId) => todoRef
