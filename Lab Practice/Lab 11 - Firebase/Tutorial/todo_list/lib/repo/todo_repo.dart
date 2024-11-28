@@ -19,7 +19,12 @@ class TodoListRepo {
   Future<Project?> getProjectById(String id) => projectRef.doc(id).get().then(
       (snapshot) => Project.fromMap(snapshot.data() as Map<String, dynamic>));
 
-  Future<void> addProject(Project project) => projectRef.add(project.toMap());
+  Future<void> addProject(Project project) async {
+    final docId = projectRef.doc().id;
+    project.id = docId;
+    await projectRef.doc(docId).set(project
+        .toMap()); //adds a new document if it does not exist or updates it if it does
+  }
 
   Future<void> updateProject(Project project) =>
       projectRef.doc(project.id).update(project.toMap());
@@ -41,7 +46,11 @@ class TodoListRepo {
     return Todo.fromMap(snapshot.data() as Map<String, dynamic>);
   }
 
-  Future<void> addTodo(Todo todo) => todoRef.add(todo.toMap());
+  Future<void> addTodo(Todo todo) async {
+    final docId = todoRef.doc().id;
+    todo.id = docId;
+    todoRef.doc(docId).set(todo.toMap());
+  }
 
   Future<void> updateTodo(Todo todo) =>
       todoRef.doc(todo.id).update(todo.toMap());
